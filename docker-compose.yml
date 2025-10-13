@@ -13,12 +13,12 @@ services:
     ports:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: always
-    depends_on: 
-      - db # This service depends on mysql. Start that first.
+    #depends_on: 
+    #  - db # This service depends on mysql. Start that first.
     environment: # Pass environment variables to the service
-      SPRING_DATASOURCE_URL: jdbc:mysql://44.222.235.128:3306/polling_app?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: roiadmin
-      SPRING_DATASOURCE_PASSWORD: roiadmin02     
+      SPRING_DATASOURCE_URL: jdbc:mysql://roi-database.conceqoq6mg5.us-east-1.rds.amazonaws.com:3306/polling_app?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: roimysqladmin
+      SPRING_DATASOURCE_PASSWORD: mysqladmin01
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - backend
       - frontend
@@ -39,20 +39,20 @@ services:
       - frontend  
 
   # Database Service (Mysql)
-  db:
-    image: mysql:5.7
-    ports:
-      - "3306:3306"
-    restart: always
-    environment:
-      MYSQL_DATABASE: polling_app
-      MYSQL_USER: roiadmin
-      MYSQL_PASSWORD: roiadmin02
-      MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - db-data:/var/lib/mysql
-    networks:
-      - backend  
+  #db:
+   # image: mysql:5.7
+    #ports:
+     # - "3306:3306"
+    #restart: always
+    #environment:
+     # MYSQL_DATABASE: polling_app
+     # MYSQL_USER: roimysqladmin
+     # MYSQL_PASSWORD: mysqladmin01
+     # MYSQL_ROOT_PASSWORD: root
+    #volumes:
+     # - db-data:/var/lib/mysql
+    #networks:
+     # - backend  
   
 # Volumes
 volumes:
